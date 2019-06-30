@@ -16,7 +16,7 @@ var reservedNames = []string{
 	"CON", "PRN", "AUX", "NUL",
 }
 
-var Alt = AltMap{
+var Alts = AltMap{
 	'<':  '＜', // Less-Than Sign -> Fullwidth Less-Than Sign
 	'>':  '＞', // Greater-Than Sign -> Fullwidth Greater-Than Sign
 	'*':  '＊', // Asterisk -> Fullwidth Asterisk
@@ -30,7 +30,7 @@ var Alt = AltMap{
 
 func (alt AltMap) Replace(s string) string {
 	return strings.Map(func(r rune) rune {
-		w := Alt[r]
+		w := Alts[r]
 		if illegal(w) {
 			if illegal(r) {
 				return -1
@@ -72,7 +72,7 @@ func split(name string) (string, string) {
 func RegularName(name string) (string, bool) {
 	zero := name
 	name = strings.TrimSpace(name)
-	name = Alt.Replace(name)
+	name = Alts.Replace(name)
 	for {
 		base, ext := split(name)
 		if in(base, reservedNames) {
