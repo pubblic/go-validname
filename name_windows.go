@@ -1,5 +1,5 @@
 //+build windows
-package validate
+package validname
 
 import (
 	"strings"
